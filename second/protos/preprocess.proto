@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package second.protos;
+
+message DatabasePreprocessingStep {
+    oneof database_preprocessing_step {
+        DBFilterByDifficulty filter_by_difficulty = 1;
+        DBFilterByMinNumPointInGroundTruth filter_by_min_num_points = 2;
+    }
+}
+
+message DBFilterByDifficulty{
+    repeated int32 removed_difficulties = 1;
+}
+
+message DBFilterByMinNumPointInGroundTruth{
+    map<string, uint32> min_num_point_pairs = 1; 
+}

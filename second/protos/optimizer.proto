@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package second.protos;
+
+// Messages for configuring the optimizing strategy for training object
+// detection models.
+
+// Top level optimizer message.
+message Optimizer {
+  oneof optimizer {
+    RMSPropOptimizer rms_prop_optimizer = 1;
+    MomentumOptimizer momentum_optimizer = 2;
+    AdamOptimizer adam_optimizer = 3;
+  }
+  bool use_moving_average = 4;
+  float moving_average_decay = 5;
+  bool fixed_weight_decay = 6; // i.e. AdamW
+}
+
+// Configuration message for the RMSPropOptimizer
+// See: https://www.tensorflow.org/api_docs/python/tf/train/RMSPropOptimizer
+message RMSPropOptimizer {
+  LearningRate learning_rate = 1;
+  float momentum_optimizer_value = 2;
+  float decay = 3;
+  float epsilon = 4;
+  float weight_decay = 5;
+}
+
+// Configuration message for the MomentumOptimizer
+// See: https://www.tensorflow.org/api_docs/python/tf/train/MomentumOptimizer
+message MomentumOptimizer {
+  LearningRate learning_rate = 1;
+  float momentum_optimizer_value = 2;
+  float weight_decay = 3;
+}
+
+// Configuration message for the AdamOptimizer
+// See: https://www.tensorflow.org/api_docs/python/tf/train/AdamOptimizer
+message AdamOptimizer {
+  LearningRate learning_rate = 1;
+  float weight_decay = 2;
+  bool amsgrad = 3;
+}
+
+message LearningRate {
+  oneof learning_rate {
+    MultiPhase multi_phase = 1;
+    OneCycle one_cycle = 2;
+  }
+}
+
+message LearningRatePhase {
+  float start = 1;
+  string lambda_func = 2;
+  string momentum_lambda_func = 3;
+}
+
+message MultiPhase {
+  repeated LearningRatePhase phases = 1;
+}
+
+message OneCycle {
+  float lr_max = 1;
+  repeated float moms = 2;
+  float div_factor = 3;
+  float pct_start = 4;
+}

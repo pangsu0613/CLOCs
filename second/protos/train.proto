@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package second.protos;
+
+import "second/protos/optimizer.proto";
+import "second/protos/preprocess.proto";
+
+message TrainConfig{
+    Optimizer optimizer = 1;
+    uint32 steps = 2;
+    uint32 steps_per_eval = 3;
+    uint32 save_checkpoints_secs = 4;
+    uint32 save_summary_steps = 5;
+    bool enable_mixed_precision = 6;
+    float loss_scale_factor = 7;
+    bool clear_metrics_every_epoch = 8;
+    string detection_2d_path = 9;
+}
