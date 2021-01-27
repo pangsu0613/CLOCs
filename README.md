@@ -27,6 +27,10 @@ pip install shapely fire pybind11 tensorboardX protobuf scikit-image numba pillo
 ```
 Follow the instructions to install `spconv v1.0` ([commit 8da6f96](https://github.com/traveller59/spconv/tree/8da6f967fb9a054d8870c3515b1b44eca2103634)). Although CLOCs fusion does not need spconv, but SECOND codebase expects it to be correctly configured.
 
+Then adding the CLOCs directory to your PYTHONPATH, you could add the following line (change '/dir/to/your/CLOCs/' according to your CLOCs directory) in your .bashrc under home directory.
+```bash
+export PYTHONPATH=$PYTHONPATH:'/dir/to/your/CLOCs/'
+```
 ## Prepare dataset (KITTI)
 Download KITTI dataset and organize the files as follows:
 
