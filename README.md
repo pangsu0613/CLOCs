@@ -19,6 +19,12 @@ Car:      Easy@0.7       Moderate@0.7   Hard@0.7
 bev:  AP: 90.52 / 90.36, 89.29 / 88.10, 87.84 / 86.80
 3d:   AP: 89.49 / 88.31, 79.31 / 77.99, 77.36 / 76.52
 ```
+
+### To Do
+ - [ ] Support fusion for pedestrian and cyclists on KITTI.
+ - [ ] Support easier testing for other 2D and 3D detectors, clean the code, remove unrelated environment setups to make the code easier to use.
+
+
 ## Install
 
 The code is developed based on SECOND-1.5, please follow the [SECOND-1.5](https://github.com/traveller59/second.pytorch/tree/v1.5) to setup the environment, the dependences for SECOND-1.5 are needed.
