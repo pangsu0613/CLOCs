@@ -107,6 +107,15 @@ eval_input_reader: {
 python ./pytorch/train.py train --config_path=./configs/car.fhd.config --model_dir=/dir/to/your_model_dir
 ```
 The trained models and related information will be saved in '/dir/to/your_model_dir'
+
+#### Common Errors & Solutions
+```bash
+File "./pytorch/train.py", line 869, in predict_v2
+    opp_labels = (box_preds[..., -1] > 0) ^ dir_labels.byte()
+RuntimeError: result type Byte can't be cast to the desired output type Bool
+```
+Solution: ```change opp_labels = (box_preds[..., -1] > 0) ^ dir_labels.byte()``` into ```opp_labels = (box_preds[..., -1] > 0) ^ dir_labels.to(torch.bool)```. This is because SECOND-V1.5 is written in older pytorch and you have a newer version.
+
 ### Evaluation
 ```bash
 python ./pytorch/train.py evaluate --config_path=./configs/car.fhd.config --model_dir=/dir/to/your/trained_model --measure_time=True --batch_size=1
