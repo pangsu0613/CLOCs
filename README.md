@@ -109,12 +109,26 @@ python ./pytorch/train.py train --config_path=./configs/car.fhd.config --model_d
 The trained models and related information will be saved in '/dir/to/your_model_dir'
 
 #### Common Errors & Solutions
+1.
 ```bash
 File "./pytorch/train.py", line 869, in predict_v2
     opp_labels = (box_preds[..., -1] > 0) ^ dir_labels.byte()
 RuntimeError: result type Byte can't be cast to the desired output type Bool
 ```
 Solution: ```change opp_labels = (box_preds[..., -1] > 0) ^ dir_labels.byte()``` into ```opp_labels = (box_preds[..., -1] > 0) ^ dir_labels.to(torch.bool)```. This is because SECOND-V1.5 is written in older pytorch and you have a newer version.
+
+2. 
+If you have too much NumbaWarning output messages during training/inferece that looks annoying, adding the following code at the beginning of train.py to ignore them:
+```bash
+from numba.core.errors import NumbaDeprecationWarning, NumbaPendingDeprecationWarning,NumbaPerformanceWarning,NumbaWarning
+import warnings
+warnings.simplefilter('ignore', category=NumbaDeprecationWarning)
+warnings.simplefilter('ignore', category=NumbaPendingDeprecationWarning)
+warnings.simplefilter('ignore', category=NumbaPerformanceWarning)
+warnings.simplefilter('ignore', category=NumbaWarning)
+warnings.simplefilter('ignore')
+warnings.filterwarnings('ignore')
+```
 
 ### Evaluation
 ```bash
