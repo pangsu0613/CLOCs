@@ -48,7 +48,7 @@ Download KITTI dataset and organize the files as follows:
        |   ├── label_2
        |   ├── velodyne
        |   └── velodyne_reduced <-- empty directory
-       └── testing     <-- 7580 test data
+       └── testing     <-- 7518 test data
        |   ├── image_2 <-- for visualization
        |   ├── calib
        |   ├── velodyne
