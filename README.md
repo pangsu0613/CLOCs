@@ -3,7 +3,7 @@
 CLOCs is a novel Camera-LiDAR Object Candidates fusion network. It provides a low-complexity multi-modal fusion framework that improves the performance of single-modality detectors. CLOCs operates on the combined output candidates of any 3D and any 2D detector, and is trained to produce more accurate 3D and 2D detection results.
 
 ## Environment
-Tested on python3.6, pytorch 1.1.0, Ubuntu 16.04/18.04.
+Tested on python3.6/3.7, pytorch 1.1.0/1.7.1, Ubuntu 16.04/18.04.
 
 ## Performance on KITTI validation set (3712 training, 3769 validation)
 ### CLOCs_SecCas (SECOND+Cascade-RCNN) VS SECOND:
