@@ -1,3 +1,4 @@
+# TODO: remove spconv dependency
 import time
 import numpy as np
 import torch

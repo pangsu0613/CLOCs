@@ -1,7 +1,6 @@
 import torch
 from torch import nn
 from torch.nn import functional as F
-import spconv
 import torchplus
 from torchplus.nn import Empty, GroupNorm, Sequential
 from torchplus.ops.array_ops import gather_nd, scatter_nd

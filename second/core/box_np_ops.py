@@ -1,3 +1,4 @@
+# TODO: remove spconv dependency
 import numba
 from pathlib import Path
 import numpy as np

@@ -1,3 +1,4 @@
+# TODO: remove spconv dependency
 import numpy as np
 
 from spconv.utils import VoxelGenerator

@@ -11,6 +11,16 @@ import torch
 from google.protobuf import text_format
 from tensorboardX import SummaryWriter
 
+from numba.core.errors import NumbaDeprecationWarning, NumbaPendingDeprecationWarning,NumbaPerformanceWarning,NumbaWarning
+import warnings
+warnings.simplefilter('ignore', category=NumbaDeprecationWarning)
+warnings.simplefilter('ignore', category=NumbaPendingDeprecationWarning)
+warnings.simplefilter('ignore', category=NumbaPerformanceWarning)
+warnings.simplefilter('ignore', category=NumbaWarning)
+warnings.simplefilter('ignore')
+warnings.filterwarnings('ignore')
+
+
 import torchplus
 import second.data.kitti_common as kitti
 from second.builder import target_assigner_builder, voxel_builder
@@ -868,7 +878,7 @@ def predict_v2(net,example, preds_dict):
             if net._use_direction_classifier:
                 dir_labels = selected_dir_labels
                 #print("dir_labels shape is:",dir_labels.shape,"the values are: ",dir_labels)
-                opp_labels = (box_preds[..., -1] > 0) ^ dir_labels.byte()
+                opp_labels = (box_preds[..., -1] > 0) ^ dir_labels.to(torch.bool)
                 box_preds[..., -1] += torch.where(
                     opp_labels,
                     torch.tensor(np.pi).type_as(box_preds),
