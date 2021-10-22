@@ -157,7 +157,7 @@ python ./pytorch/train.py evaluate --config_path=./configs/car.fhd.config --mode
 If you want to export KITTI format label files, add ```pickle_result=False``` at the end of the above commamd.
 
 ## Pedestrian and Cyclist Detection
-In `
+[TBD]
 
 ## Fusion of other 3D and 2D detectors
 Step 1: Prepare the 2D detection candidates, run your 2D detector and save the results in KITTI format. It is recommended to run inference with NMS score threshold equals to 0 (no score thresholding), but if you don't know how to setup this, it is also fine for CLOCs.
