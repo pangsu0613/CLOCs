@@ -20,6 +20,21 @@ bev:  AP: 90.52 / 90.36, 89.29 / 88.10, 87.84 / 86.80
 3d:   AP: 89.49 / 88.31, 79.31 / 77.99, 77.36 / 76.52
 ```
 
+### Pedestrian and Cyclist Results vs. SECOND:
+Using CLOCs_SecCas (SECOND+Cascade-RCNN) trained on KITTI validation set for Pedestrians/Cyclists
+```
+Pedestrian:    Easy@0.5     Moderate@0.5    Hard@0.5
+bbox:    AP:  74.57/58.26   70.81/54.14    62.51/50.03
+bev:     AP:  68.26/61.97   62.92/56.77    56.51/51.27
+3d:      AP:  62.88/58.01   56.20/51.88    50.10/47.05
+```
+```
+Cyclist:       Easy@0.5     Moderate@0.5    Hard@0.5
+bbox:    AP:  96.17/87.65   80.25/63.11    75.61/60.72
+bev:     AP:  91.42/81.91   71.52/59.36    67.05/55.53
+3d:      AP:  87.57/78.50   67.92/56.74    63.67/52.83
+```
+
 ### To Do
  - [ ] Support fusion for pedestrian and cyclists on KITTI.
  - [ ] Support easier testing for other 2D and 3D detectors, clean the code, remove unrelated environment setups to make the code easier to use.
@@ -139,6 +154,10 @@ For example if you want to test the pretrained model downloaded from [here](http
 python ./pytorch/train.py evaluate --config_path=./configs/car.fhd.config --model_dir=/dir/to/your/CLOCs_SecCas_pretrained --measure_time=True --batch_size=1
 ```
 If you want to export KITTI format label files, add ```pickle_result=False``` at the end of the above commamd.
+
+## Pedestrian and Cyclist Detection
+In `
+
 ## Fusion of other 3D and 2D detectors
 Step 1: Prepare the 2D detection candidates, run your 2D detector and save the results in KITTI format. It is recommended to run inference with NMS score threshold equals to 0 (no score thresholding), but if you don't know how to setup this, it is also fine for CLOCs.
 
