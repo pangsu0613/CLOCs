@@ -53,6 +53,10 @@ Then adding the CLOCs directory to your PYTHONPATH, you could add the following 
 ```bash
 export PYTHONPATH=$PYTHONPATH:'/dir/to/your/CLOCs/'
 ```
+
+## Pre-trained Models
+Pretrained Models used for inference on Car, Pedestrian, and Cyclist detections can be found [here](https://drive.google.com/drive/u/3/folders/1ScFUWPwzK5_VXb-LYQZuZVkiBj-dTMJ9).
+
 ## Prepare dataset (KITTI)
 Download KITTI dataset and organize the files as follows:
 
@@ -157,6 +161,10 @@ python ./pytorch/train.py evaluate --config_path=./configs/car.fhd.config --mode
 If you want to export KITTI format label files, add ```pickle_result=False``` at the end of the above commamd.
 
 ## Pedestrian and Cyclist Detection
+Step 0: **Download Pretrained Models**
+
+If you want to utilize the already trained models, please consult the "Pre-trained Models" section above.
+
 Step 1: **Prepare the Config Files**
 
 Under the `./configs` directory, edit the file `pedestrian.fhd.config` or `cyclist.fhd.config`:
