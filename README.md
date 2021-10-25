@@ -157,7 +157,28 @@ python ./pytorch/train.py evaluate --config_path=./configs/car.fhd.config --mode
 If you want to export KITTI format label files, add ```pickle_result=False``` at the end of the above commamd.
 
 ## Pedestrian and Cyclist Detection
-[TBD]
+Step 1: **Prepare the Config Files**
+
+Under the `./configs` directory, edit the file `pedestrian.fhd.config` or `cyclist.fhd.config`:
+- Change the value of `detection_2d_path` to your pedestrian 2D detections.
+- Set `steps` and `steps_per_eval` to your desired value (tweak based on training set size, for example, if we have 3712 training examples, setting “steps” equal to 74240 (3712 x 20) means training for 20 epochs. “steps_per_eval” means the step interval for each evaluation, for example, if you set “steps_per_eval” to 3712, it means doing evaluation for each epoch.)
+
+Step 2: **Modifying `train.py`**
+
+Edit `{CLOCs_directory}/second/pytorch/train.py`:
+- Replace the paremeters in every instance of `net = build_inference_net('./configs/car.fhd.config', '../model_dir')` as it appears in the file to point towards the pedestrian/cyclist config. Additionally, ensure that the model directory points to a directory that contins the SECOND-V1.5 pretrained model for pedestrians/cyclists.
+- In the `train` function, around line 258, change the `iou_bev_max` conditional in the assignment of variables `target_for_fusion`, `positive_index`, and `negative_index` to `0.5`, `0.5`, and `0.25` respectfully. The negative index value can be changed in training to alter results, but the final performance difference is not large.
+
+Step 3: **Modifying `voxelnet.py`**
+
+In the file `{CLOCs_directory}/scond/pytorch/models/voxelnet.py`:
+- Around line 393, change `predicted_class_index = np.where(predicted_class=='Car')` to whichever detection you want, aka `'Pedestrian'` or `'Cyclist'`
+- Around line 395, chnage the line `score = np.array([float(x[15]) for x in content])` to `score = np.array([float(x[15]) for x in content])/{score scale}` if your 2D detections use a score scale different that 0-1.0
+- If desired, you can also change the score threshold for 2D detections around line 398. Change the `-100`, which denotes no thresholding, in the line `top_predictions = middle_predictions[np.where(middle_predictions[:,4]>=-100)]` to a decimal score threshold between 0.0 and 1.0.
+
+Step 4: **Modify the Terminal Command**
+
+Run the normal terminal command for training, `python ./pytorch/train.py train --config_path={config file path} --model_dir={model directory}`, pointing towards the config file we edited earlier, and the model directory with the SECOND-V1.5 pretrained model for Pedestrians/Cyclists
 
 ## Fusion of other 3D and 2D detectors
 Step 1: Prepare the 2D detection candidates, run your 2D detector and save the results in KITTI format. It is recommended to run inference with NMS score threshold equals to 0 (no score thresholding), but if you don't know how to setup this, it is also fine for CLOCs.
