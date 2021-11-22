@@ -2,6 +2,8 @@
 
 CLOCs is a novel Camera-LiDAR Object Candidates fusion network. It provides a low-complexity multi-modal fusion framework that improves the performance of single-modality detectors. CLOCs operates on the combined output candidates of any 3D and any 2D detector, and is trained to produce more accurate 3D and 2D detection results.
 
+CLOCs achieves new best performance in KITTI 3D detection leaderboard (82.28%) through fusing CT3D and Cascade-RCNN, code will be updated soon.
+
 ## Environment
 Tested on python3.6/3.7, pytorch 1.1.0/1.7.1, Ubuntu 16.04/18.04.
 
@@ -37,7 +39,8 @@ bev:     AP:  91.42/81.91   71.52/59.36    67.05/55.53
 ```
 
 ### To Do
- - [ ] Support fusion for pedestrian and cyclists on KITTI.
+ - [ ] Update the codebase to support other 3D detectors (PV-RCNN and CT3D)
+ - [x] Support fusion for pedestrian and cyclists on KITTI.
  - [ ] Support easier testing for other 2D and 3D detectors, clean the code, remove unrelated environment setups to make the code easier to use.
 
 
