@@ -58,7 +58,7 @@ export PYTHONPATH=$PYTHONPATH:'/dir/to/your/CLOCs/'
 ```
 
 ## Pre-trained Models
-Pretrained Models used for inference on Car, Pedestrian, and Cyclist detections can be found [here](https://drive.google.com/drive/u/3/folders/1ScFUWPwzK5_VXb-LYQZuZVkiBj-dTMJ9).
+Pretrained Models used for inference on Car, Pedestrian, and Cyclist detections can be found [here](https://drive.google.com/drive/folders/16Z9_c8VbZVsvrHczn67ZCeOHYx1x5VDj?usp=sharing).
 
 ## Prepare dataset (KITTI)
 Download KITTI dataset and organize the files as follows:
@@ -83,15 +83,15 @@ Download KITTI dataset and organize the files as follows:
        └── kitti_infos_trainval.pkl
 ```
 
-Next, you could follow the SECOND-1.5 instructions to create kitti infos, reduced point cloud and groundtruth-database infos, or just download these files from [here](https://drive.google.com/drive/folders/1ScFUWPwzK5_VXb-LYQZuZVkiBj-dTMJ9?usp=sharing) and put them in the correct directories as shown above.
+Next, you could follow the SECOND-1.5 instructions to create kitti infos, reduced point cloud and groundtruth-database infos, or just download these files from [here](https://drive.google.com/drive/folders/16Z9_c8VbZVsvrHczn67ZCeOHYx1x5VDj?usp=sharing) and put them in the correct directories as shown above.
 
 ## Fusion of SECOND and Cascade-RCNN
 ### Preparation
 CLOCs operates on the combined output of a 3D detector and a 2D detector. For this example, we use SECOND as the 3D detector, Cascade-RCNN as the 2D detector. 
 
-1. For this example, we use detections with sigmoid scores, you could download the Cascade-RCNN detections for the KITTI train and validations set from [here](https://drive.google.com/drive/folders/1ScFUWPwzK5_VXb-LYQZuZVkiBj-dTMJ9?usp=sharing) file name:'cascade_rcnn_sigmoid_data', or you could run the 2D detector by your self and save the results for the fusion. You could also use your own 2D detector to generate these 2D detections and save them in KITTI format for fusion. 
+1. For this example, we use detections with sigmoid scores, you could download the Cascade-RCNN detections for the KITTI train and validations set from [here](https://drive.google.com/drive/folders/16Z9_c8VbZVsvrHczn67ZCeOHYx1x5VDj?usp=sharing) file name:'cascade_rcnn_sigmoid_data', or you could run the 2D detector by your self and save the results for the fusion. You could also use your own 2D detector to generate these 2D detections and save them in KITTI format for fusion. 
 
-2. Then download the pretrained SECOND models from [here](https://drive.google.com/drive/folders/1ScFUWPwzK5_VXb-LYQZuZVkiBj-dTMJ9?usp=sharing) file name: 'second_model.zip', create an empty directory named ```model_dir``` under your CLOCs root directory and unzip the files to ```model_dir```. Your CLOCs directory should look like this:
+2. Then download the pretrained SECOND models from [here](https://drive.google.com/drive/folders/16Z9_c8VbZVsvrHczn67ZCeOHYx1x5VDj?usp=sharing) file name: 'second_model.zip', create an empty directory named ```model_dir``` under your CLOCs root directory and unzip the files to ```model_dir```. Your CLOCs directory should look like this:
 ```plain
 └── CLOCs
        ├── d2_detection_data    <-- 2D detection candidates data
@@ -157,7 +157,7 @@ warnings.filterwarnings('ignore')
 ```bash
 python ./pytorch/train.py evaluate --config_path=./configs/car.fhd.config --model_dir=/dir/to/your/trained_model --measure_time=True --batch_size=1
 ```
-For example if you want to test the pretrained model downloaded from [here](https://drive.google.com/drive/folders/1ScFUWPwzK5_VXb-LYQZuZVkiBj-dTMJ9?usp=sharing) file name: 'CLOCs_SecCas_pretrained.zip', unzip it, then you could run:
+For example if you want to test the pretrained model downloaded from [here](https://drive.google.com/drive/folders/16Z9_c8VbZVsvrHczn67ZCeOHYx1x5VDj?usp=sharing) file name: 'CLOCs_SecCas_pretrained.zip', unzip it, then you could run:
 ```bash
 python ./pytorch/train.py evaluate --config_path=./configs/car.fhd.config --model_dir=/dir/to/your/CLOCs_SecCas_pretrained --measure_time=True --batch_size=1
 ```
